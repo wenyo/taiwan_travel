@@ -4,10 +4,11 @@
 </template>
 
 <script>
+import { getData } from "./api/api.js";
 export default {
-  data() {
+  setup() {
     return {
-      name: "App",
+      name: "Ap1p",
     };
   },
   mounted() {
@@ -15,8 +16,7 @@ export default {
   },
   methods: {
     getList() {
-      const api = "https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/Taipei?$top=30&$format=JSON";
-      this.$http.get(api).then((response) => {
+      getData().then((response) => {
         console.log(response.data);
       });
     },

@@ -1,28 +1,21 @@
 import axios from "axios";
+import jsSHA from "jssha";
 
-// User相關的 api
+function getAuthorizationHeader() {
+  let AppID = "366fbf64aebc45ff8f04c809aac8a4f7";
+  let AppKey = "sxpLeVxV_3OgMp1kTQY53s80Qeg";
+  let GMTString = new Date().toGMTString();
+  let ShaObj = new jsSHA("SHA-1", "TEXT");
+  ShaObj.setHMACKey(AppKey, "TEXT");
+  ShaObj.update(`x-date:${GMTString}`);
+  let HMAC = ShaObj.getHMAC("B64");
+  let Authorization = `hmac username=${AppID}algorithm="hmac-sha1", headers="x-date", signature="${HMAC}"`;
+  return { Authorization: Authorization, "X-Date": GMTString };
+}
+
 const userRequest = axios.create({
-  baseURL: "https://api/user/",
-});
-// 文章相關的 api
-const articleRequest = axios.create({
-  baseURL: "https://api/article/",
-});
-// 搜尋相關的 api
-const searchRequest = axios.create({
-  baseURL: "https://api/search/",
+  baseURL: "https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/",
+  headers: getAuthorizationHeader(),
 });
 
-// User 相關的 api
-export const apiUserLogin = (data) => userRequest.post("/signIn", data);
-export const apiUserLogout = (data) => userRequest.post("/signOut", data);
-export const apiUserSignUp = (data) => userRequest.post("/signUp", data);
-
-// 文章相關的 api
-export const apiArticleItem = () => articleRequest.get("/ArticleItem");
-export const apiArticleMsg = (data) => articleRequest.post("/ArticleMsg", data);
-export const apiArticleLink = (data) => articleRequest.post("/ArticleLink", data);
-
-// 搜尋相關的 api
-export const apiSearch = (data) => searchRequest.get(`/Search?searchdata=${data}`);
-export const apiSearchType = () => searchRequest.get(`/SearchType`);
+export const getData = () => userRequest.get("Taipei?$top=30&$format=JSON");
