@@ -1,31 +1,46 @@
 <template>
   <div class="box-container">
-    <div class="shadow">
-      <div></div>
-      <div></div>
-    </div>
+    <slot></slot>
   </div>
 </template>
 
+<script>
+export default {
+  created() {
+    console.log(this.$children);
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 .box-container {
-  background: cornflowerblue;
+  background-color: $basic-color-white;
   width: 100%;
-  padding: 10px;
   position: relative;
+  padding: 20px;
+  margin: 0 auto;
 
   &::before,
   &::after {
     position: absolute;
+    z-index: -1;
     content: "";
-    width: 100%;
+    width: 45%;
+    max-width: 400px;
     top: 50%;
-    bottom: -15px;
-    box-shadow: 0 15px 10px #777;
+    bottom: 15px;
+    box-shadow: 0 15px 10px $basic-color-dark#{57};
   }
 
   &::before {
-    left: 10px;
+    left: 0;
+    transform: rotate(-3deg);
+  }
+
+  &::after {
+    right: 0;
+    left: auto;
+    transform: rotate(3deg);
   }
 }
 </style>

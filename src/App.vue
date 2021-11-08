@@ -1,6 +1,8 @@
 <template>
   <Nav />
-  <Box />
+  <Box>
+    <div>Taiwain</div>
+  </Box>
 </template>
 
 <script>
@@ -18,5 +20,9 @@ export default {
 <style>
 .contain {
   padding: 20px;
+}
+.test {
+  margin: 50px;
+  width: 200px;
 }
 </style>
