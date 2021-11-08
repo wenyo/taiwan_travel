@@ -1,18 +1,22 @@
 <template>
-  <div>{{ name }}</div>
-  <div>name</div>
+  <Nav />
 </template>
 
 <script>
 import { getData } from "./api/api.js";
+import Nav from "./component/Nav";
+
 export default {
+  components: {
+    Nav,
+  },
   setup() {
     return {
       name: "Ap1p",
     };
   },
   mounted() {
-    this.getList();
+    // this.getList();
   },
   methods: {
     getList() {
@@ -24,4 +28,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.contain {
+  padding: 20px;
+}
+</style>
