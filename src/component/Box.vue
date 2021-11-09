@@ -1,16 +1,8 @@
 <template>
   <div class="box-container">
-    <slot></slot>
+    <slot />
   </div>
 </template>
-
-<script>
-export default {
-  created() {
-    console.log(this.$children);
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 .box-container {
@@ -27,7 +19,7 @@ export default {
     content: "";
     width: 45%;
     max-width: 400px;
-    top: 50%;
+    top: 95%;
     bottom: 15px;
     box-shadow: 0 15px 10px $basic-color-dark#{57};
   }

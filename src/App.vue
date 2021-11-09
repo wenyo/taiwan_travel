@@ -1,18 +1,16 @@
 <template>
   <Nav />
-  <Box>
-    <div>Taiwain</div>
-  </Box>
+  <Home />
 </template>
 
 <script>
 import Nav from "./component/Nav";
-import Box from "./component/Box";
+import Home from "./page/Home";
 
 export default {
   components: {
     Nav,
-    Box,
+    Home,
   },
 };
 </script>
