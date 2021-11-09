@@ -21,7 +21,7 @@
     max-width: 400px;
     top: 95%;
     bottom: 15px;
-    box-shadow: 0 15px 10px $basic-color-dark#{57};
+    box-shadow: 0 15px 10px $basic-color-shadow;
   }
 
   &::before {

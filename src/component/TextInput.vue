@@ -27,7 +27,7 @@ export default {
 input {
   border-radius: 6px;
   border: none;
-  box-shadow: 0 4px 3px $basic-color-dark#{57};
+  box-shadow: 0 4px 3px $basic-color-shadow;
   font-size: 18px;
   padding: 10px;
   width: 100%;

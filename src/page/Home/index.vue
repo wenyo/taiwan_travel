@@ -41,29 +41,26 @@ export default {
   width: 40%;
   display: flex;
   flex-wrap: wrap;
-
-  & > div {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-  }
 }
 .margin-10 {
+  width: 100%;
+  display: flex;
+  align-items: top;
+
   .select,
-  .input-text {
-    margin: 5px;
+  .input-text,
+  .icon {
+    margin: 3px;
   }
 }
 .input-text {
-  width: calc(100% - 40px - 10px);
+  flex-grow: 1;
 }
 .select {
-  width: calc(50% - 20px - 10px);
+  flex-grow: 1;
 }
 .icon {
-  position: absolute;
-  top: 5px;
-  right: -5px;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 </style>
