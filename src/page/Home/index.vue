@@ -9,7 +9,7 @@
       <div class="margin-10">
         <Select />
         <Select />
-        <IconButton type="gps" color="second" />
+        <IconButton type="search" color="master" />
       </div>
     </div>
   </Banner>

@@ -53,6 +53,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 3px 3px 3px $basic-color-shadow;
 
   img {
     width: 80%;
