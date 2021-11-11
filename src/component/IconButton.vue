@@ -5,9 +5,7 @@
 </template>
 
 <script>
-import iconGPS from "../assets/img/Icon/GPS.svg";
-import iconSearch from "../assets/img/Icon/search.svg";
-import iconPrevious from "../assets/img/Icon/previous.svg";
+import { iconGPS, iconSearch, iconPrevious } from "./Icon.js";
 
 const icon = {
   gps: iconGPS,

@@ -1,18 +1,18 @@
 <template>
+  <div>
   <Banner>
-    <div class="contain">
-      <img src="@/assets/img/welcome.svg" alt="" />
-      <div class="margin-10">
-        <TextInput v-model="text" />
-        <IconButton type="gps" color="second" />
-      </div>
-      <div class="margin-10">
-        <Select />
-        <Select />
-        <IconButton type="search" color="master" />
-      </div>
+    <div class="margin-10">
+      <TextInput v-model="text" />
+      <IconButton type="gps" color="second" />
+    </div>
+    <div class="margin-10">
+      <Select />
+      <Select />
+      <IconButton type="search" color="master" />
     </div>
   </Banner>
+  <List1 title="熱門城市"/>
+  </div>
 </template>
 
 <script>
@@ -20,12 +20,14 @@ import Banner from "./Banner";
 import TextInput from "../../component/TextInput";
 import IconButton from "../../component/IconButton";
 import Select from "../../component/Select";
+import List1 from "./List1";
 export default {
   components: {
     Banner,
     TextInput,
     IconButton,
     Select,
+    List1
   },
   data() {
     return {
@@ -35,13 +37,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.contain {
-  min-width: 300px;
-  max-width: 500px;
-  width: 40%;
-  display: flex;
-  flex-wrap: wrap;
-}
 .margin-10 {
   width: 100%;
   display: flex;

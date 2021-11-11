@@ -1,7 +1,11 @@
 <template>
   <Box>
     <div class="slot-container">
-      <slot />
+      <div class="contain">
+        <img src="@/assets/img/welcome.svg" alt="welcome" />
+        <p>台北、台中、台南、屏東、宜蘭……遊遍台灣</p>
+        <slot />
+      </div>
     </div>
   </Box>
 </template>
@@ -11,11 +15,6 @@ import Box from "../../component/Box";
 export default {
   components: {
     Box,
-  },
-  data() {
-    return {
-      text: "test",
-    };
   },
 };
 </script>
@@ -35,4 +34,23 @@ export default {
   background-size: cover;
   background-position: center;
 }
+
+.contain {
+  min-width: 300px;
+  max-width: 500px;
+  width: 40%;
+  display: flex;
+  flex-wrap: wrap;
+
+  img {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $basic-color-white;
+    margin-bottom: 5px;
+  }
+}
+
 </style>
