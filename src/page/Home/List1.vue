@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="contain">
     <ViceTitle title="熱門城市" />
     <ul>
       <li v-for="city in city_key" :key="city">

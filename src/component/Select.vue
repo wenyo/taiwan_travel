@@ -1,7 +1,14 @@
 <template>
   <div class="select">
-    <div class="title" @click="show = !show">{{ title }}</div>
-    <Option :options="options" v-model="show" />
+    <div class="title" @click="optionToggle(!show)">
+      {{ title }}{{modelValue}}
+    </div>
+    <Option
+      :options="options"
+      v-model="selectedIdx"
+      :show="show"
+      :optionToggle="optionToggle"
+    />
   </div>
 </template>
 
@@ -11,10 +18,10 @@ import Option from "./Option";
 export default {
   props: {
     options: {
-      type: Array[String],
-      default: ["122", "999"],
+      type: Array[Object],
+      default: [{ text: "111", value: "" }],
     },
-    title: {
+    defaultTitle: {
       typr: String,
       default: "請選擇",
     },
@@ -28,8 +35,21 @@ export default {
   },
   data() {
     return {
+      selectedIdx: this.modelValue,
       show: false,
     };
+  },
+  methods: {
+    optionToggle(show) {
+      this.show = show;
+    },
+  },
+  computed: {
+    title() {
+      return this.modelValue === -1
+        ? this.defaultTitle
+        : this.options[this.modelValue].text;
+    },
   },
 };
 </script>

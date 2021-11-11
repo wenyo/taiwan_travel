@@ -1,6 +1,13 @@
 <template>
-  <ul v-if="modelValue">
-    <li v-for="(option, idx) in options" :key="idx">{{ option }}</li>
+  <ul v-if="show">
+    <li
+      v-for="(option, idx) in options"
+      :class="{ selected: modelValue == idx }"
+      :key="idx"
+      @click="$emit('update:modelValue', idx); optionToggle(false)"
+    >
+      {{ option.text }}
+    </li>
   </ul>
 </template>
 
@@ -8,28 +15,52 @@
 export default {
   props: {
     options: {
-      type: Array[String],
-      default: ["1272", "999"],
+      type: Array[Object],
+      default: [{ text: "111", value: "" }],
     },
     modelValue: {
+      type: Number,
+      default: -1,
+    },
+    show: {
       type: Boolean,
       default: false,
     },
+    optionToggle:{
+      type: Function,
+      default: ()=>{}
+    }
+  },
+  methods: {
   },
 };
 </script>
 
 <style lang="scss" scoped>
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background: $basic-color-shadow;
+}
 ul {
   position: absolute;
+  max-height: 200px;
   top: calc(100% - 10px);
   right: 0;
   left: 0;
   border-radius: 0 0 6px 6px;
-  overflow: hidden;
+  overflow-y: scroll;
   box-shadow: 3px 3px 3px $basic-color-shadow;
   background-color: $basic-color-white;
   padding-top: 5px;
+  font-size: 18px;
 }
 
 li {
@@ -37,7 +68,8 @@ li {
   padding: 5px 10px;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &.selected {
     background-color: $basic-color-grey;
   }
 }
