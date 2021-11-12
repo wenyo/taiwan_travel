@@ -22,6 +22,7 @@ export default {
     display: inline-flex;
     align-items: flex-end;
     font-size: 20px;
+    margin-bottom: 20px;
 }
 
 .triangle {
