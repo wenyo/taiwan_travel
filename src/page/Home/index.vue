@@ -10,16 +10,16 @@
         <Select
           default-title="不分縣市"
           :options="cityOption"
-          v-model="cityIdx"
+          v-model="cityKey"
         />
         <IconButton
           type="search"
           color="master"
-          :click-func="scenicSpotFetch"
+          :click-func="()=>scenicSpotFetch(cityKey)"
         />
       </div>
     </Banner>
-    <!-- <List1 title="熱門城市" /> -->
+    <List1 title="熱門城市" :city-key="cityKey" @update="cityKeyUpdate" />
     <List3 :title="viceTitle3" :list="list3" />
   </div>
 </template>
@@ -29,26 +29,25 @@ import Banner from "./Banner";
 import TextInput from "../../component/TextInput";
 import IconButton from "../../component/IconButton";
 import Select from "../../component/Select";
-// import List1 from "./List1";
-import List3 from "./List3";
+import List1 from "../component/List1";
+import List3 from "../component/List3";
 import { city_info, city_key } from "../../json/city";
 import { getScenicSpot } from "../../api/api";
 
-const cityIdxDefault = -1;
 export default {
   components: {
     Banner,
     TextInput,
     IconButton,
     Select,
-    // List1,
+    List1,
     List3,
   },
   data() {
     return {
       text: "",
       scenicSpotList: [],
-      cityIdx: cityIdxDefault,
+      cityKey: "",
       cityOption: city_key.map((city) => {
         return { text: city_info[city].ch, value: city };
       }),
@@ -69,24 +68,24 @@ export default {
     },
   },
   methods: {
-    scenicSpotFetch() {
-      const cityNameEn =
-        this.cityIdx === cityIdxDefault
-          ? ""
-          : city_info[city_key[this.cityIdx]].en;
+    scenicSpotFetch(cityKey) {
+      const cityNameEn = cityKey === "" ? "" : city_info[cityKey].en;
       getScenicSpot({
         city: cityNameEn,
         name: this.text,
       }).then((res) => (this.scenicSpotList = res));
     },
+    cityKeyUpdate(val){
+      this.cityKey = val;
+      this.scenicSpotFetch(val)
+    }
   },
   watch: {
     scenicSpotList() {
       const cityNameCh =
-        this.cityIdx === cityIdxDefault
-          ? ""
-          : city_info[city_key[this.cityIdx]].ch;
-      this.viceTitle3 = `${cityNameCh}, ${this.text}`;
+        this.cityKey === "" ? "" : city_info[this.cityKey].ch;
+      const keyWordList = [cityNameCh, this.text].filter(i=>i!=="");
+      this.viceTitle3 = keyWordList.join(", ");
     },
   },
 };

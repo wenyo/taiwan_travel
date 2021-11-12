@@ -26,8 +26,8 @@ export default {
       default: "請選擇",
     },
     modelValue: {
-      type: Number,
-      default: -1,
+      type: String,
+      default: "",
     },
   },
   components: {
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      selectedIdx: this.modelValue,
+      selectedIdx: this.selectedIdxChangeByModleValue(),
       show: false,
     };
   },
@@ -43,18 +43,25 @@ export default {
     optionToggle(show) {
       this.show = show;
     },
+    selectedIdxChangeByModleValue() {
+      return this.options.findIndex(
+        (option) => option.value === this.modelValue
+      );
+    },
   },
   computed: {
     title() {
-      return this.modelValue === -1
+      return this.selectedIdx === -1
         ? this.defaultTitle
-        : this.options[this.modelValue].text;
+        : this.options[this.selectedIdx].text;
     },
   },
   watch: {
     selectedIdx() {
-      console.log("this.selectedIdx")
-      this.$emit("update:modelValue", this.selectedIdx);
+      this.$emit("update:modelValue", this.options[this.selectedIdx].value);
+    },
+    modelValue() {
+      this.selectedIdx = this.selectedIdxChangeByModleValue();
     },
   },
 };
