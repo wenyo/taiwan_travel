@@ -26,7 +26,9 @@ export default {
 }
 
 .contain-m {
-  padding: 20px 100px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 10px 20px;
 }
 
 .test {
