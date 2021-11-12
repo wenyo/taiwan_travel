@@ -1,7 +1,7 @@
 <template>
   <div class="select">
     <div class="title" @click="optionToggle(!show)">
-      {{ title }}{{modelValue}}
+      {{ title }}
     </div>
     <Option
       :options="options"
@@ -49,6 +49,12 @@ export default {
       return this.modelValue === -1
         ? this.defaultTitle
         : this.options[this.modelValue].text;
+    },
+  },
+  watch: {
+    selectedIdx() {
+      console.log("this.selectedIdx")
+      this.$emit("update:modelValue", this.selectedIdx);
     },
   },
 };

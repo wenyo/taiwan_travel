@@ -13,11 +13,11 @@
 export default {
   props: {
     placeholder: {
-      type: [String],
+      type: String,
       default: "搜尋關鍵字",
     },
     modelValue: {
-      type: [String],
+      type: String,
     },
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <button :class="colors[color]" class="icon">
+  <button :class="colors[color]" class="icon" @click="clickFunc">
     <img :src="icon[type]" alt="" />
   </button>
 </template>
@@ -24,12 +24,16 @@ const colors = {
 export default {
   props: {
     type: {
-      type: [String],
+      type: String,
       default: Object.keys(icon)[0],
     },
     color: {
-      type: [String],
+      type: String,
       default: "master",
+    },
+    clickFunc: {
+      type: Function,
+      default: () => {},
     },
   },
   data() {
@@ -52,6 +56,10 @@ button {
   justify-content: center;
   align-items: center;
   box-shadow: 3px 3px 3px $basic-color-shadow;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 1px 1px 3px $basic-color-shadow inset;
+  }
 
   img {
     width: 80%;

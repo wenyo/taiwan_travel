@@ -2,9 +2,9 @@
   <ul v-if="show">
     <li
       v-for="(option, idx) in options"
-      :class="{ selected: modelValue == idx }"
+      :class="{ selected: modelValue === idx }"
       :key="idx"
-      @click="$emit('update:modelValue', idx); optionToggle(false)"
+      @click="optionChoese(idx)"
     >
       {{ option.text }}
     </li>
@@ -26,12 +26,16 @@ export default {
       type: Boolean,
       default: false,
     },
-    optionToggle:{
+    optionToggle: {
       type: Function,
       default: ()=>{}
-    }
+    },
   },
   methods: {
+    optionChoese(idx) {
+      this.$emit("update:modelValue", idx);
+      this.optionToggle(false);
+    },
   },
 };
 </script>

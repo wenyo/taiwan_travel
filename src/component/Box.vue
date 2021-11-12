@@ -19,18 +19,18 @@
     content: "";
     width: 45%;
     max-width: 400px;
-    top: 95%;
+    top: 90%;
     bottom: 15px;
     box-shadow: 0 15px 10px $basic-color-shadow;
   }
 
   &::before {
-    left: 0;
+    left: 3px;
     transform: rotate(-3deg);
   }
 
   &::after {
-    right: 0;
+    right: 3px;
     left: auto;
     transform: rotate(3deg);
   }

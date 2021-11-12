@@ -1,6 +1,6 @@
 <template>
   <div class="contain">
-    <ViceTitle title="熱門城市" />
+    <ViceTitle :title="title" />
     <ul>
       <li v-for="city in city_key" :key="city">
         <span>{{ city_info[city].ch }}</span>
@@ -13,10 +13,16 @@
 </template>
 
 <script>
-import ViceTitle from "./ViceTitle";
+import ViceTitle from "../../component/ViceTitle";
 import { city_info, city_key } from "../../json/city";
 
 export default {
+  props:{
+    title:{
+      type: String,
+      default: "副標題"
+    }
+  },
   components: {
     ViceTitle,
   },
