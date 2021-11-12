@@ -1,8 +1,8 @@
 <template>
-  <div class="contain">
+  <div class="contain-m">
     <ViceTitle :title="title" />
     <ul>
-      <li v-for="city in city_key" :key="city">
+      <li v-for="city in city_key" :key="city" @click="$emit('update', city)">
         <span>{{ city_info[city].ch }}</span>
         <div class="img">
           <img :src="city_info[city].img" :alt="city_info[city].ch" />
@@ -17,11 +17,15 @@ import ViceTitle from "../../component/ViceTitle";
 import { city_info, city_key } from "../../json/city";
 
 export default {
-  props:{
-    title:{
+  props: {
+    title: {
       type: String,
-      default: "副標題"
-    }
+      default: "副標題",
+    },
+    cityKey: {
+      type: String,
+      default: "",
+    },
   },
   components: {
     ViceTitle,

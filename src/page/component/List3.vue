@@ -65,9 +65,10 @@ li {
   padding: 5px;
   margin-bottom: 30px;
   line-height: 1.3em;
+  align-content: stretch;
 
   .box-container {
-    // height: 280px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
