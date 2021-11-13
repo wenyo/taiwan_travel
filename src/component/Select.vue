@@ -2,6 +2,7 @@
   <div class="select">
     <div class="title" @click="optionToggle(!show)">
       {{ title }}
+      <img :src="iconDropdown" alt="">
     </div>
     <Option
       :options="options"
@@ -14,6 +15,7 @@
 
 <script>
 import Option from "./Option";
+import {iconDropdown} from "./Icon.js";
 
 export default {
   props: {
@@ -37,6 +39,7 @@ export default {
     return {
       selectedIdx: this.selectedIdxChangeByModleValue(),
       show: false,
+      iconDropdown
     };
   },
   methods: {
@@ -80,6 +83,17 @@ export default {
     padding: 10px;
     background-color: $basic-color-white;
     width: 100%;
+  }
+
+  .title{
+    position: relative;
+
+    img{
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      right: 0;
+    }
   }
 }
 </style>

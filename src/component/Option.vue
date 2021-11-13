@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="show">
+  <ul v-if="show" :class="{ scroll: options.length > 7 }">
     <li
       v-for="(option, idx) in options"
       :class="{ selected: modelValue === idx }"
@@ -28,7 +28,7 @@ export default {
     },
     optionToggle: {
       type: Function,
-      default: ()=>{}
+      default: () => {},
     },
   },
   methods: {
@@ -60,17 +60,21 @@ ul {
   right: 0;
   left: 0;
   border-radius: 0 0 6px 6px;
-  overflow-y: scroll;
   box-shadow: 3px 3px 3px $basic-color-shadow;
   background-color: $basic-color-white;
   padding-top: 5px;
   font-size: 18px;
+
+  &.scroll {
+    overflow-y: scroll;
+  }
 }
 
 li {
   width: 100%;
   padding: 5px 10px;
   cursor: pointer;
+  word-spacing: 5px;
 
   &:hover,
   &.selected {
