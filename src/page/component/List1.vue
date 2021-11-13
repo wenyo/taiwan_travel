@@ -3,7 +3,7 @@
     <ViceTitle :title="title" />
     <ul>
       <template v-for="(city, idx) in city_key" :key="city">
-        <li @click="$emit('update', city)" v-if="idx < city_key.length / 2">
+        <li @click="$emit('update', city)" v-if="cityShow(idx)">
           <h4>
             <img :src="iconMapM" alt="地標圖示" />
             <span>{{ city_info[city].ch }}</span>
@@ -14,6 +14,8 @@
         </li>
       </template>
     </ul>
+    <IconButton type="previous" color="white" size="m" v-show="!hasNext" @click="hasNext=!hasNext"/>
+    <IconButton type="next" color="dark" size="m" v-show="hasNext" @click="hasNext=!hasNext"/>
   </div>
 </template>
 
@@ -21,6 +23,7 @@
 import ViceTitle from "../../component/ViceTitle";
 import { city_info, city_key } from "../../json/city";
 import { iconMapM } from "../../component/Icon";
+import IconButton from "../../component/IconButton";
 
 export default {
   props: {
@@ -35,13 +38,24 @@ export default {
   },
   components: {
     ViceTitle,
+    IconButton,
   },
   data() {
     return {
       iconMapM,
       city_info,
       city_key: city_key.filter((city) => city_info[city].img),
+      hasNext: true,
     };
+  },
+  methods: {
+    cityShow(idx) {
+      if (this.hasNext) {
+        return idx < this.city_key.length / 2;
+      } else {
+        return idx >= this.city_key.length / 2;
+      }
+    },
   },
 };
 </script>
@@ -104,6 +118,23 @@ li {
     transform: translate(-50%, -50%);
     z-index: 1;
     color: $basic-color-white;
+  }
+}
+
+.contain-m {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+
+  &:not(:last-child) {
+    left: 5px;
+  }
+
+  &:last-child {
+    right: 5px;
   }
 }
 </style>
