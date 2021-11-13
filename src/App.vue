@@ -28,7 +28,7 @@ export default {
 .contain-m {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 10px 40px;
 }
 
 .test {

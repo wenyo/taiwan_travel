@@ -73,6 +73,7 @@ li {
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
+    transition: 0.3s;
 
     &:hover {
       box-shadow: 0 0 5px $basic-color-shadow;
@@ -97,6 +98,7 @@ li {
     }
 
     .no-image {
+      width: 60%;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);

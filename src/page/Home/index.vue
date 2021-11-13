@@ -8,29 +8,38 @@
       <div class="margin-10">
         <Select default-title="類別" />
         <Select
-          default-title="不分縣市"
+          default-title="全縣市"
           :options="cityOption"
           v-model="cityKey"
         />
         <IconButton
           type="search"
           color="master"
-          :click-func="()=>scenicSpotFetch(cityKey)"
+          :click-func="() => scenicSpotFetch(cityKey)"
         />
       </div>
     </Banner>
-    <List1 title="熱門城市" :city-key="cityKey" @update="cityKeyUpdate" />
-    <SearchResult :list="scenicSpotList" :cityKey="cityKey" :text="text"/>
+    <HotNews
+      :city-key="cityKey"
+      :click-func="cityKeyUpdate"
+      v-if="scenicSpotList.length === 0"
+    />
+    <SearchResult
+      :list="scenicSpotList"
+      :cityKey="cityKey"
+      :text="text"
+      v-else
+    />
   </div>
 </template>
 
 <script>
 import Banner from "./Banner";
 import SearchResult from "./SearchResult";
+import HotNews from "./HotNews";
 import TextInput from "../../component/TextInput";
 import IconButton from "../../component/IconButton";
 import Select from "../../component/Select";
-import List1 from "../component/List1";
 import { city_info, city_key } from "../../json/city";
 import { getScenicSpot } from "../../api/api";
 
@@ -38,10 +47,10 @@ export default {
   components: {
     Banner,
     SearchResult,
+    HotNews,
     TextInput,
     IconButton,
     Select,
-    List1,
   },
   data() {
     return {
@@ -62,12 +71,11 @@ export default {
         name: this.text,
       }).then((res) => (this.scenicSpotList = res));
     },
-    cityKeyUpdate(val){
+    cityKeyUpdate(val) {
       this.cityKey = val;
-      this.scenicSpotFetch(val)
-    }
+      this.scenicSpotFetch(val);
+    },
   },
-
 };
 </script>
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
 <template>
-    <List3 :title="viceTitle" :list="list3" />
+  <List3 :title="viceTitle" :list="list3" />
 </template>
 
 <script>
@@ -17,17 +17,28 @@ export default {
     },
     cityKey: {
       type: String,
-      default:""
+      default: "",
     },
     text: {
       type: String,
-      default:""
+      default: "",
     },
   },
   data() {
     return {
       viceTitle: "",
     };
+  },
+  mounted() {
+    this.viceTitleUpdate();
+  },
+  methods: {
+    viceTitleUpdate() {
+      const cityNameCh = this.cityKey === "" ? "" : city_info[this.cityKey].ch;
+      const keyWordList = [cityNameCh, this.text].filter((i) => i !== "");
+      const viceTitleResult = keyWordList.join(", ");
+      this.viceTitle = viceTitleResult === "" ? "搜尋結果" : viceTitleResult;
+    },
   },
   computed: {
     list3() {
@@ -43,10 +54,8 @@ export default {
     },
   },
   watch: {
-    list() {
-      const cityNameCh = this.cityKey === "" ? "" : city_info[this.cityKey].ch;
-      const keyWordList = [cityNameCh, this.text].filter((i) => i !== "");
-      this.viceTitle = keyWordList.join(", ");
+    list3() {
+      this.viceTitleUpdate();
     },
   },
 };
