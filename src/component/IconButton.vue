@@ -1,16 +1,21 @@
 <template>
-  <button :class="colors[color]" class="icon" @click="clickFunc">
+  <button
+    :class="`${colors[color]} size-${size}`"
+    class="icon"
+    @click="clickFunc"
+  >
     <img :src="icon[type]" alt="" />
   </button>
 </template>
 
 <script>
-import { iconGPS, iconSearch, iconPrevious } from "./Icon.js";
+import { iconGPS, iconSearch, iconPrevious1, iconNext1 } from "./Icon.js";
 
 const icon = {
   gps: iconGPS,
   search: iconSearch,
-  previous: iconPrevious,
+  previous: iconPrevious1,
+  next: iconNext1,
 };
 
 const colors = {
@@ -31,6 +36,10 @@ export default {
       type: String,
       default: "master",
     },
+    size: {
+      type: String,
+      default: "l",
+    },
     clickFunc: {
       type: Function,
       default: () => {},
@@ -49,14 +58,23 @@ export default {
 button {
   border: unset;
   background-color: unset;
-  width: 40px;
-  height: 40px;
   border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 3px 3px 3px $basic-color-shadow;
+  box-shadow: 0 3px 3px $basic-color-shadow;
   cursor: pointer;
+
+  &.size-l {
+    width: 40px;
+    height: 40px;
+  }
+
+  &.size-m {
+    width: 32px;
+    height: 32px;
+  }
+
   &:hover {
     box-shadow: 1px 1px 3px $basic-color-shadow inset;
   }
@@ -79,6 +97,10 @@ button {
   }
   &.basic-color-dark {
     background-color: $basic-color-dark;
+
+    &:hover {
+      box-shadow: 1px 1px 3px $basic-color-white inset;
+    }
   }
 }
 </style>
