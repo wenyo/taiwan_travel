@@ -43,13 +43,13 @@ export default {
   computed: {
     list3() {
       return this.list.map((info) => {
-        const { City, Name, Picture } = info;
+        const { ID, City, Name, Picture } = info;
         const hasPicture = Object.keys(info.Picture).length > 0;
         const PictureUrl = hasPicture ? Picture.PictureUrl1 : "";
         const PictureDescription = hasPicture
           ? Picture.PictureDescription1
           : "";
-        return { Name, City, PictureUrl, PictureDescription };
+        return { ID, Name, City, PictureUrl, PictureDescription };
       });
     },
   },

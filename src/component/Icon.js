@@ -8,7 +8,7 @@ import iconNext from "../assets/img/Icon/next.svg"; // 白色實心三角形 >
 import iconNext1 from "../assets/img/Icon/next-1.svg"; // 黑色實心三角形 >
 import iconPrevious from "../assets/img/Icon/previous.svg"; // 黑色 <
 import iconPrevious1 from "../assets/img/Icon/previous-1.svg"; // 黑色實心三角形 <
-import NoImage from "../assets/img/no_image.svg";
+import noImage from "../assets/img/no_image.svg";
 
 export {
   iconGPS,
@@ -21,5 +21,5 @@ export {
   iconMap,
   iconNext,
   iconNext1,
-  NoImage
+  noImage
 };

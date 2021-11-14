@@ -10,7 +10,7 @@
               :src="info.PictureUrl"
               :alt="info.PictureDescription"
             />
-            <img v-else class="no-image" :src="NoImage" alt="沒有圖片" />
+            <img v-else class="no-image" :src="noImage" alt="沒有圖片" />
           </div>
           <h3>{{ info.Name }}</h3>
           <div class="loctation">
@@ -26,7 +26,7 @@
 <script>
 import Box from "../../component/Box.vue";
 import ViceTitle from "../../component/ViceTitle";
-import { iconMap, NoImage } from "../../component/Icon.js";
+import { iconMap, noImage } from "../../component/Icon.js";
 
 export default {
   props: {
@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       iconMap,
-      NoImage,
+      noImage,
     };
   },
 };
@@ -88,6 +88,9 @@ li {
 
     img {
       position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 
       &:not(.no-image) {
         max-width: 150%;
@@ -99,14 +102,11 @@ li {
 
     .no-image {
       width: 60%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
     }
   }
 }
 
-h3{
+h3 {
   margin: 10px 0;
 }
 
