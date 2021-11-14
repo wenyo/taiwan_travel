@@ -1,24 +1,24 @@
 <template>
   <div class="contain-m">
-    <ViceTitle title="熱門活動" />
+    <ViceTitle :title="title" :type="titleType" />
     <ul>
-      <li v-for="activity in activities" :key="activity.ID">
+      <li v-for="list in lists" :key="list.ID">
         <Box>
           <div class="img">
             <img
-              v-if="!!activity.Picture.PictureUrl1"
-              :src="activity.Picture.PictureUrl1"
-              :alt="activity.Picture.PictureDescription1"
+              v-if="!!list.Picture.PictureUrl1"
+              :src="list.Picture.PictureUrl1"
+              :alt="list.Picture.PictureDescription1"
             />
             <img v-else class="no-image" :src="noImage" alt="沒有圖片" />
           </div>
           <div class="article">
-            <h4>{{ activity.Name }}</h4>
-            <p>{{ activity.Description }}</p>
+            <h4>{{ list.Name }}</h4>
+            <p>{{ list.Description }}</p>
             <div class="info">
               <div>
                 <img :src="iconMap" alt="地點圖示" />
-                <div>{{ activity.City }}</div>
+                <div>{{ list.City }}</div>
               </div>
               <Button text="活動詳情" />
             </div>
@@ -42,7 +42,14 @@ export default {
     Button,
   },
   props: {
-    activities: {
+    titleType: {
+      type: Number,
+      default: 1,
+    },
+    title: {
+      type: String,
+    },
+    lists: {
       type: Array[Object],
       default: [],
     },

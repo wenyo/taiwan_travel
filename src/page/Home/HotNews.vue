@@ -1,6 +1,6 @@
 <template>
   <List1 title="熱門城市" :city-key="cityKey" @update="clickFunc" />
-  <List2 :activities="activities"/>
+  <List2 title="熱門活動" :lists="activities"/>
 </template>
 
 <script>
