@@ -1,17 +1,22 @@
 <template>
-  <List3 :title="viceTitle" :list="list3" />
+  <List3 :title="viceTitle" :lists="list3" :page="page"/>
 </template>
 
 <script>
 import List3 from "../component/List3";
 import { city_info } from "../../json/city";
+import { PAGE_TYPE } from "../../util/Type";
 
 export default {
   components: {
     List3,
   },
   props: {
-    list: {
+    page: {
+      type: String,
+      default: PAGE_TYPE[1],
+    },
+    lists: {
       type: Array[Object],
       default: [],
     },
@@ -42,7 +47,7 @@ export default {
   },
   computed: {
     list3() {
-      return this.list.map((info) => {
+      return this.lists.map((info) => {
         const { ID, City, Name, Picture } = info;
         const hasPicture = Object.keys(info.Picture).length > 0;
         const PictureUrl = hasPicture ? Picture.PictureUrl1 : "";

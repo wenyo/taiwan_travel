@@ -34,6 +34,7 @@ import ViceTitle from "../../component/ViceTitle";
 import Box from "../../component/Box";
 import Button from "../../component/Button";
 import { iconMap, noImage } from "../../component/Icon.js";
+import { PAGE_TYPE } from "../../util/Type";
 
 export default {
   components: {
@@ -42,16 +43,21 @@ export default {
     Button,
   },
   props: {
-    titleType: {
-      type: Number,
-      default: 1,
+    page: {
+      type: String,
     },
+
     title: {
       type: String,
     },
     lists: {
       type: Array[Object],
       default: [],
+    },
+  },
+  computed: {
+    titleType() {
+      return PAGE_TYPE.indexOf(this.page);
     },
   },
   data() {

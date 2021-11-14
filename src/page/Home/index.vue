@@ -6,17 +6,17 @@
         <IconButton type="gps" color="second" />
       </div>
       <div class="margin-10">
-        <Select default-title="類別" />
+        <Select
+          default-title="類別"
+          :options="searchType"
+          v-model="searchTypeKey"
+        />
         <Select
           default-title="不分縣市"
           :options="cityOption"
           v-model="cityKey"
         />
-        <IconButton
-          type="search"
-          color="master"
-          :click-func="() => scenicSpotFetch(cityKey)"
-        />
+        <IconButton type="search" color="master" :click-func="searchClick" />
       </div>
     </Banner>
     <HotNews
@@ -24,10 +24,11 @@
       :click-func="cityKeyUpdate"
       :activities="activities"
       :restaurants="restaurants"
-      v-if="scenicSpotList.length === 0"
+      v-if="searchResult.length === 0"
     />
     <SearchResult
-      :list="scenicSpotList"
+      :page="page"
+      :lists="searchResult"
       :cityKey="cityKey"
       :text="text"
       v-else
@@ -42,8 +43,11 @@ import HotNews from "./HotNews";
 import TextInput from "../../component/TextInput";
 import IconButton from "../../component/IconButton";
 import Select from "../../component/Select";
+import { PAGE_TYPE, SEARCH_TYPE } from "../../util/Type";
 import { city_info, city_key } from "../../json/city";
 import { getScenicSpot, getActivity, getRestaurant } from "../../api/api";
+
+const ONE_PAGE_ITEMS = 30;
 
 export default {
   components: {
@@ -54,35 +58,92 @@ export default {
     IconButton,
     Select,
   },
+  props: {
+    page: {
+      type: String,
+      default: PAGE_TYPE[0],
+    },
+  },
   data() {
     return {
       text: "",
-      scenicSpotList: [],
+      searchResult: [],
       activities: [],
-      restaurants:[],
+      restaurants: [],
       cityKey: "",
+      searchTypeKey: "",
       cityOption: city_key.map((city) => {
         return { text: city_info[city].ch, value: city };
       }),
     };
   },
+  computed: {
+    searchType() {
+      switch (this.page) {
+        case PAGE_TYPE[0]:
+          return SEARCH_TYPE.slice(0, 2);
+        case PAGE_TYPE[1]:
+          return SEARCH_TYPE.slice(2, 4);
+        default:
+          break;
+      }
+      return SEARCH_TYPE;
+    },
+  },
   mounted() {
-    this.activitiesFetch();
+    this.activitiesFetch({
+      cityKey: city_key[0],
+      text: this.text,
+      count: 4,
+      callback: this.activitiesSet,
+    });
     this.restaurantsFetch();
   },
   methods: {
-    scenicSpotFetch(cityKey) {
+    searchClick() {
+      let param = {
+        cityKey: this.cityKey,
+        text: this.text,
+        count: ONE_PAGE_ITEMS,
+        callback: this.searchResultSet,
+      };
+      switch (this.searchTypeKey) {
+        case SEARCH_TYPE[0].value:
+          this.scenicSpotFetch(param);
+          break;
+        case SEARCH_TYPE[1].value:
+          this.activitiesFetch(param);
+          break;
+        case SEARCH_TYPE[2].value:
+          break;
+        case SEARCH_TYPE[3].value:
+          break;
+
+        default:
+          break;
+      }
+    },
+    searchResultSet(res) {
+      this.searchResult = res;
+    },
+    activitiesSet(res) {
+      this.activities = res;
+    },
+    scenicSpotFetch({ cityKey, text, count, callback }) {
       const cityNameEn = cityKey === "" ? "" : city_info[cityKey].en;
       getScenicSpot({
         city: cityNameEn,
-        name: this.text,
-      }).then((res) => (this.scenicSpotList = res));
+        name: text,
+        count,
+      }).then((res) => callback(res));
     },
-    activitiesFetch() {
+    activitiesFetch({ cityKey, text, count, callback }) {
+      const cityNameEn = cityKey === "" ? "" : city_info[cityKey].en;
       getActivity({
-        city: "Taipei",
-        name: this.text,
-      }).then((res) => (this.activities = res));
+        city: cityNameEn,
+        name: text,
+        count,
+      }).then((res) => callback(res));
     },
     restaurantsFetch() {
       getRestaurant({

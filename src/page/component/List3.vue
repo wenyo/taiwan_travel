@@ -27,12 +27,12 @@
 import Box from "../../component/Box.vue";
 import ViceTitle from "../../component/ViceTitle";
 import { iconMap, noImage } from "../../component/Icon.js";
+import { PAGE_TYPE } from "../../util/Type";
 
 export default {
   props: {
-    titleType: {
-      type: Number,
-      default: 1,
+    page: {
+      type: String,
     },
     title: {
       type: String,
@@ -46,8 +46,10 @@ export default {
     ViceTitle,
     Box,
   },
-  mounted() {
-    console.log(this.lists);
+  computed: {
+    titleType() {
+      return PAGE_TYPE.indexOf(this.page);
+    },
   },
   data() {
     return {

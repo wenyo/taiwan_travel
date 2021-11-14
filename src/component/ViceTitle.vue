@@ -1,7 +1,7 @@
 <template>
   <div class="vice-title">
-    <div v-if="type===1" class="icon triangle"></div>
-    <div v-if="type===2" class="icon square"></div>
+    <div v-if="type===0" class="icon triangle"></div>
+    <div v-if="type===1" class="icon square"></div>
     <p>{{ title }}</p>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
     },
     type:{
       type: Number,
-      default: 1
+      default: 0
     }
   },
 };
