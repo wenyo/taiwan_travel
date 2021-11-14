@@ -1,4 +1,4 @@
-export const PAGE_TYPE = ["scenic_activities", "restaurant_hotel"];
+export const PAGE_TYPE = ["scenic_activities", "restaurant_hotel", "transportation"];
 
 export const SEARCH_TYPE = [
   { text: "景點", value: "scenic-spot" },

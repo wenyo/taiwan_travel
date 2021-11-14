@@ -1,28 +1,31 @@
 <template>
   <nav class="contain">
     <h1>
-      <img src="@/assets/img/logo.svg" alt="台灣旅遊景點導覽" />
-      <div>Taiwain Travel 台灣旅遊景點導覽</div>
+      <router-link to="/">
+        <img src="@/assets/img/logo.svg" alt="台灣旅遊景點導覽" />
+        <div>Taiwain Travel 台灣旅遊景點導覽</div>
+      </router-link>
     </h1>
     <ul>
-      <li>
-        <img src="@/assets/img/item1.svg" alt="台灣景點" />
-        <span>台灣景點</span>
-      </li>
-      <li>
-        <img src="@/assets/img/item2.svg" alt="美食住宿" />
-        <span>美食住宿</span>
-      </li>
-      <li>
-        <img src="@/assets/img/item3.svg" alt="景點交通" />
-        <span>景點交通</span>
+      <li v-for="(route, idx) in routes" :key="idx">
+        <router-link :to="route.path">
+          <img :src="route.icon_img" :alt="route.text" />
+          <span>{{ route.text }}</span>
+        </router-link>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
-export default {};
+import { routes } from "../router";
+export default {
+  data() {
+    return {
+      routes,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -51,18 +54,31 @@ ul {
   font-size: 14px;
 
   li {
-    display: flex;
-    align-items: center;
     margin-left: 27px;
-    text-decoration: underline;
 
-    &:first-child {
+    .now-page span,
+    &:hover span {
+      border-bottom: 1px solid;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    span {
+      padding-bottom: 3px;
+      transition: 0.3s;
+    }
+
+    &:first-child > a {
       color: $primary-color-master;
     }
-    &:nth-child(2) {
+    &:nth-child(2) > a {
       color: $primary-color-second;
     }
-    &:nth-child(3) {
+    &:nth-child(3) > a {
       color: $primary-color-third;
     }
   }

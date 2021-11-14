@@ -1,16 +1,14 @@
 <template>
   <Nav />
-  <Home />
+  <router-view></router-view>
 </template>
 
 <script>
 import Nav from "./component/Nav";
-import Home from "./page/Home";
 
 export default {
   components: {
     Nav,
-    Home,
   },
 };
 </script>
@@ -23,6 +21,10 @@ export default {
 
 .contain {
   padding: 20px;
+}
+
+.contain-l{
+    height: calc(100vh - 145px);
 }
 
 .contain-m {

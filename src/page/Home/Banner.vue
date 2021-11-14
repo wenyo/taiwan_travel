@@ -1,6 +1,6 @@
 <template>
   <Box>
-    <div class="slot-container">
+    <div class="contain-l slot-container" :class="page">
       <div class="contain">
         <img src="@/assets/img/welcome.svg" alt="welcome" />
         <p>台北、台中、台南、屏東、宜蘭……遊遍台灣</p>
@@ -12,9 +12,16 @@
 
 <script>
 import Box from "../../component/Box";
+import { PAGE_TYPE } from "../../util/Type";
 export default {
   components: {
     Box,
+  },
+  props: {
+    page: {
+      type: String,
+      default: PAGE_TYPE[1],
+    },
   },
 };
 </script>
@@ -25,14 +32,19 @@ export default {
 }
 
 .slot-container {
-  height: calc(100vh - 140px);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("~@/assets/img/1-bg-1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
+  &.scenic_activities {
+    background-image: url("~@/assets/img/1-bg-1.jpg");
+  }
+  &.restaurant_hotel {
+    background-image: url("~@/assets/img/1-bg-2.jpg");
+  }
 }
 
 .contain {
@@ -52,5 +64,4 @@ export default {
     margin-bottom: 5px;
   }
 }
-
 </style>

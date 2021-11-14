@@ -26,7 +26,8 @@
 <script>
 import Box from "../../component/Box.vue";
 import ViceTitle from "../../component/ViceTitle";
-import { iconMap, noImage } from "../../component/Icon.js";
+import { iconMap } from "../../component/Icon.js";
+import { noImage } from "../../component/Image.js";
 import { PAGE_TYPE } from "../../util/Type";
 
 export default {

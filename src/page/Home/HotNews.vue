@@ -40,7 +40,6 @@ export default {
       return this.getList(this.activities);
     },
     list3() {
-      console.log(this.getList(this.restaurants));
       return this.getList(this.restaurants);
     },
   },

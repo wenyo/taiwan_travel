@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Banner>
+    <Banner :page="page">
       <div class="margin-10">
         <TextInput v-model="text" />
         <IconButton type="gps" color="second" />
