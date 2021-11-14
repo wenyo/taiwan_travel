@@ -79,7 +79,8 @@ li {
 
   &:hover,
   &.selected {
-    background-color: $basic-color-grey;
+    background-color: $primary-color-master;
+    color: $basic-color-white;
   }
 }
 </style>
