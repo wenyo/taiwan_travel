@@ -6,9 +6,9 @@
         <Box>
           <div class="img">
             <img
-              v-if="!!list.Picture.PictureUrl1"
-              :src="list.Picture.PictureUrl1"
-              :alt="list.Picture.PictureDescription1"
+              v-if="!!list.PictureUrl"
+              :src="list.PictureUrl"
+              :alt="list.PictureDescription"
             />
             <img v-else class="no-image" :src="noImage" alt="沒有圖片" />
           </div>

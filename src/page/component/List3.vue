@@ -1,8 +1,8 @@
 <template>
   <div class="contain-m">
-    <ViceTitle :title="title" />
+    <ViceTitle :title="title" :type="titleType" />
     <ul>
-      <li v-for="info in list" :key="info.ID">
+      <li v-for="info in lists" :key="info.ID">
         <Box>
           <div class="img">
             <img
@@ -30,10 +30,14 @@ import { iconMap, noImage } from "../../component/Icon.js";
 
 export default {
   props: {
+    titleType: {
+      type: Number,
+      default: 1,
+    },
     title: {
       type: String,
     },
-    list: {
+    lists: {
       type: Array[Object],
       default: [],
     },
@@ -41,6 +45,9 @@ export default {
   components: {
     ViceTitle,
     Box,
+  },
+  mounted() {
+    console.log(this.lists);
   },
   data() {
     return {

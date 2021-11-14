@@ -23,6 +23,7 @@
       :city-key="cityKey"
       :click-func="cityKeyUpdate"
       :activities="activities"
+      :restaurants="restaurants"
       v-if="scenicSpotList.length === 0"
     />
     <SearchResult
@@ -42,7 +43,7 @@ import TextInput from "../../component/TextInput";
 import IconButton from "../../component/IconButton";
 import Select from "../../component/Select";
 import { city_info, city_key } from "../../json/city";
-import { getScenicSpot, getActivity } from "../../api/api";
+import { getScenicSpot, getActivity, getRestaurant } from "../../api/api";
 
 export default {
   components: {
@@ -58,6 +59,7 @@ export default {
       text: "",
       scenicSpotList: [],
       activities: [],
+      restaurants:[],
       cityKey: "",
       cityOption: city_key.map((city) => {
         return { text: city_info[city].ch, value: city };
@@ -66,6 +68,7 @@ export default {
   },
   mounted() {
     this.activitiesFetch();
+    this.restaurantsFetch();
   },
   methods: {
     scenicSpotFetch(cityKey) {
@@ -80,6 +83,12 @@ export default {
         city: "Taipei",
         name: this.text,
       }).then((res) => (this.activities = res));
+    },
+    restaurantsFetch() {
+      getRestaurant({
+        city: "",
+        name: this.text,
+      }).then((res) => (this.restaurants = res));
     },
     cityKeyUpdate(val) {
       this.cityKey = val;

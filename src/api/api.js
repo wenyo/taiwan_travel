@@ -28,12 +28,17 @@ const TDXRequestGet = (path) =>
     .then((res) => res.data)
     .catch((error) => console.error(error));
 
-export const getScenicSpot = ({ city = "", name = "" }) =>
+export const getScenicSpot = ({ city = "", name = "", count = 30 }) =>
   TDXRequestGet(
-    `ScenicSpot/${city}?$filter=contains(Name,'${name}')&$top=30&$format=JSON`
+    `ScenicSpot/${city}?$filter=contains(Name,'${name}')&$top=${count}&$format=JSON`
   );
 
-export const getActivity = ({ city = "", name = "" }) =>
+export const getActivity = ({ city = "", name = "", count = 4 }) =>
   TDXRequestGet(
-    `Activity/${city}?$filter=contains(Name,'${name}')&$top=4&$format=JSON`
+    `Activity/${city}?$filter=contains(Name,'${name}')&$top=${count}&$format=JSON`
+  );
+
+export const getRestaurant = ({ city = "", name = "", count = 10 }) =>
+  TDXRequestGet(
+    `Restaurant/${city}?$filter=contains(Name,'${name}')&$top=${count}&$format=JSON`
   );
