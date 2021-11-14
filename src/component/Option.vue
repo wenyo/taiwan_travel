@@ -55,6 +55,7 @@ export default {
 }
 ul {
   position: absolute;
+  z-index: 20;
   max-height: 200px;
   top: calc(100% - 10px);
   right: 0;
