@@ -42,3 +42,8 @@ export const getRestaurant = ({ city = "", name = "", count = 10 }) =>
   TDXRequestGet(
     `Restaurant/${city}?$filter=contains(Name,'${name}')&$top=${count}&$format=JSON`
   );
+
+export const getHotel = ({ city = "", name = "", count = 10 }) =>
+  TDXRequestGet(
+    `Hotel/${city}?$filter=contains(Name,'${name}')&$top=${count}&$format=JSON`
+  );
