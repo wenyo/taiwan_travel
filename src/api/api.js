@@ -18,18 +18,22 @@ function getAuthorizationHeader() {
   return { Authorization: Authorization, "X-Date": GMTString };
 }
 
-const userRequest = axios.create({
+const TDXRequest = axios.create({
   baseURL: "https://ptx.transportdata.tw/MOTC/v2/Tourism/",
   headers: getAuthorizationHeader(),
 });
 
-const userRequestGet = (path) =>
-  userRequest
-    .get(path)
+const TDXRequestGet = (path) =>
+  TDXRequest.get(path)
     .then((res) => res.data)
     .catch((error) => console.error(error));
 
-export const getScenicSpot = ({ city = "", name }) =>
-  userRequestGet(
+export const getScenicSpot = ({ city = "", name = "" }) =>
+  TDXRequestGet(
     `ScenicSpot/${city}?$filter=contains(Name,'${name}')&$top=30&$format=JSON`
+  );
+
+export const getActivity = ({ city = "", name = "" }) =>
+  TDXRequestGet(
+    `Activity/${city}?$filter=contains(Name,'${name}')&$top=4&$format=JSON`
   );

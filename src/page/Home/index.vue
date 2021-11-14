@@ -8,7 +8,7 @@
       <div class="margin-10">
         <Select default-title="類別" />
         <Select
-          default-title="全縣市"
+          default-title="不分縣市"
           :options="cityOption"
           v-model="cityKey"
         />
@@ -22,6 +22,7 @@
     <HotNews
       :city-key="cityKey"
       :click-func="cityKeyUpdate"
+      :activities="activities"
       v-if="scenicSpotList.length === 0"
     />
     <SearchResult
@@ -41,7 +42,7 @@ import TextInput from "../../component/TextInput";
 import IconButton from "../../component/IconButton";
 import Select from "../../component/Select";
 import { city_info, city_key } from "../../json/city";
-import { getScenicSpot } from "../../api/api";
+import { getScenicSpot, getActivity } from "../../api/api";
 
 export default {
   components: {
@@ -56,12 +57,15 @@ export default {
     return {
       text: "",
       scenicSpotList: [],
+      activities: [],
       cityKey: "",
       cityOption: city_key.map((city) => {
         return { text: city_info[city].ch, value: city };
       }),
-      viceTitle3: "",
     };
+  },
+  mounted() {
+    this.activitiesFetch();
   },
   methods: {
     scenicSpotFetch(cityKey) {
@@ -70,6 +74,12 @@ export default {
         city: cityNameEn,
         name: this.text,
       }).then((res) => (this.scenicSpotList = res));
+    },
+    activitiesFetch() {
+      getActivity({
+        city: "Taipei",
+        name: this.text,
+      }).then((res) => (this.activities = res));
     },
     cityKeyUpdate(val) {
       this.cityKey = val;
@@ -94,7 +104,7 @@ export default {
   flex-grow: 1;
 }
 .select {
-  flex-grow: 1;
+  width: 50%;
 }
 .icon {
   flex-grow: 0;
